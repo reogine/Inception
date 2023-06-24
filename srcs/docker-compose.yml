@@ -1,0 +1,8 @@
+services:
+  nginx:
+    container_name: nginx
+    pull_policy: never
+    build: srcs/nginx
+    image: nginx
+    ports:
+      - "443:443"
