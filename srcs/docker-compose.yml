@@ -1,8 +1,63 @@
+networks:
+  inception-net:
+    name: inception-net
+    driver: bridge
+
 services:
   nginx:
+    depends_on:
+      - wordpress
     container_name: nginx
     pull_policy: never
-    build: srcs/nginx
+    build: requirements/nginx
     image: nginx
+    env_file: .env
+    networks:
+      - inception-net
     ports:
       - "443:443"
+    volumes:
+      - "wp_data:/var/www/html/"
+    restart: always
+
+  wordpress:
+    depends_on:
+      - mariadb
+    container_name: wordpress
+    pull_policy: never
+    build: requirements/wordpress
+    image: wordpress
+    env_file: .env
+    networks:
+      - inception-net
+    volumes:
+      - "wp_data:/var/www/html"
+    restart: always
+
+  mariadb:
+    container_name: mariadb
+    pull_policy: never
+    build: requirements/mariadb
+    image: mariadb
+    env_file: .env
+    networks:
+      - inception-net
+    restart: always
+    volumes:
+      - "db_data:/var/lib/mysql/"
+
+volumes:
+  wp_data:
+    name: "wp_data"
+    driver: local
+    driver_opts:
+      type: none
+      device: "/Users/mostapha/Documents/data/wordpress_vol/"
+      o: bind
+  db_data:
+    name: "db_data"
+    driver: local
+    driver_opts:
+      type: none
+      device: "/Users/mostapha/Documents/data/mariadb_vol/"
+      o: bind
