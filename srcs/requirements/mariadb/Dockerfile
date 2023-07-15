@@ -4,7 +4,7 @@ FROM debian:oldstable
 RUN apt update -y && apt install -y mariadb-server
 
 #copy mariadb init script
-COPY scriptat.sh scriptat.sh
+COPY tools/scriptat.sh scriptat.sh
 
 RUN chmod +x scriptat.sh
 

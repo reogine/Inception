@@ -8,7 +8,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     mkdir -p wordpress &&\
     mkdir -p /run/php
 
-COPY ./scriptat.sh /scriptat.sh
+COPY ./tools/scriptat.sh /scriptat.sh
 
 RUN chmod +x /scriptat.sh
 
