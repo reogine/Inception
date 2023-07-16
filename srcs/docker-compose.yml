@@ -54,12 +54,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: "/Users/mostapha/Documents/data/wordpress_vol/"
+      device: "/home/midfath/data/wordpress_vol/"
       o: bind
   db_data:
     name: "db_data"
     driver: local
     driver_opts:
       type: none
-      device: "/Users/mostapha/Documents/data/mariadb_vol/"
+      device: "/home/midfath/data/mariadb_vol"
       o: bind
